@@ -10,36 +10,40 @@ import java.util.stream.Collectors;
 
 public class Answerer {
     public String answerFor(String question) {
-        if (question.equals("What is your name?")) return "dfiner";
+        try {
+            if (question.equals("What is your name?")) return "dfiner";
 
-        if (question.startsWith("Which of the following numbers is the largest:")) {
-            return largest(question.split("\\?")[0]);
+            if (question.startsWith("Which of the following numbers is the largest:")) {
+                return largest(question.split("\\?")[0]);
+            }
+
+            if (question.contains("plus")) {
+                return plus(question.split("\\?")[0]);
+            }
+
+            if (question.contains("minus")) {
+                return minus(question.split("\\?")[0]);
+            }
+
+            if (question.contains("multiplied by") && !question.contains("plus")) {
+                return multiplied(question.split("\\?")[0]);
+            }
+
+            if (question.startsWith("Which of the following numbers is both a square and a cube: ")) {
+                return squarecube(question.split("\\?")[0]);
+            }
+
+            if (question.startsWith("Which of the following numbers are primes: ")) {
+                return prime(question.split("\\?")[0]);
+            }
+
+            if (question.contains(" to the power of ")) {
+                return power(question.split("\\?")[0]);
+            }
+        } catch (Exception e) {
+            return "??";
         }
 
-        if (question.contains("plus")) {
-            return plus(question.split("\\?")[0]);
-        }
-
-        if (question.contains("minus")) {
-            return minus(question.split("\\?")[0]);
-        }
-
-
-        if (question.contains("multiplied by") && !question.contains("plus")) {
-            return multiplied(question.split("\\?")[0]);
-        }
-
-        if (question.startsWith("Which of the following numbers is both a square and a cube: ")) {
-            return squarecube(question.split("\\?")[0]);
-        }
-
-        if (question.startsWith("Which of the following numbers are primes: ")) {
-            return prime(question.split("\\?")[0]);
-        }
-
-        if (question.contains(" to the power of ")) {
-            return power(question.split("\\?")[0]);
-        }
 
 
         return "??";
