@@ -49,7 +49,12 @@ public class AnswererTest {
         assertThat(contents, equalTo("729"));
     }
 
+    @Test
+    public void canAnswerMyNam6() {
+        var contents = new Answerer().answerFor("Which of the following numbers are primes: 80, 55, 63, 94, 53?");
 
+        assertThat(contents, equalTo("53"));
+    }
 
 
 }
