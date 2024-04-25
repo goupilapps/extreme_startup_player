@@ -56,5 +56,21 @@ public class AnswererTest {
         assertThat(contents, equalTo("53"));
     }
 
+    @Test
+    public void canAnswerMyNam7() {
+        var contents = new Answerer().answerFor("Which of the following numbers are primes: 13, 97, 68, 58, 52?");
+
+        assertThat(contents, equalTo("97"));
+    }
+
+
+
+    @Test
+    public void canAnswerMyName8() {
+        var contents = new Answerer().answerFor("What is 66 to the power of 96?");
+
+        assertThat(contents, equalTo("4744798918330551171180617284481429834305801228466171779877713503983285104041580486246648664690007380441848356718808531139955344113236484486564044820572702230446110664992751616"));
+    }
+
 
 }

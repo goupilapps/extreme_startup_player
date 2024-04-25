@@ -1,8 +1,11 @@
 package com.oocode;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class Answerer {
     public String answerFor(String question) {
@@ -31,6 +34,10 @@ public class Answerer {
 
         if (question.startsWith("Which of the following numbers are primes: ")) {
             return prime(question.split("\\?")[0]);
+        }
+
+        if (question.contains(" to the power of ")) {
+            return power(question.split("\\?")[0]);
         }
 
 
@@ -69,6 +76,14 @@ public class Answerer {
         var l = Arrays.stream(primes).boxed().toList();
 
         return Arrays.stream(q.split(":")[1].split(",")).map(String::trim).map(Integer::parseInt).filter(l::contains).toArray()[0].toString();
+    }
+
+    private String power(String q) {
+
+        List<String> values = Arrays.stream(q.substring(8, q.length()).split(" to the power of ")).toList();
+        BigInteger value = new BigInteger(values.get(0));
+        return value.pow(Integer.parseInt(values.get(1))).toString();
+
     }
 
 }
