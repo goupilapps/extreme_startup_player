@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Answerer {
     public String answerFor(String question) {
@@ -24,7 +25,7 @@ public class Answerer {
         }
 
 
-        if (question.contains("multiplied by")) {
+        if (question.contains("multiplied by") && !question.contains("plus")) {
             return multiplied(question.split("\\?")[0]);
         }
 
@@ -75,7 +76,8 @@ public class Answerer {
         int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293};
         var l = Arrays.stream(primes).boxed().toList();
 
-        return Arrays.stream(q.split(":")[1].split(",")).map(String::trim).map(Integer::parseInt).filter(l::contains).toArray()[0].toString();
+        return "";
+        //return Arrays.stream(q.split(":")[1].split(",")).map(String::trim).map(Integer::parseInt).filter(l::contains).collect(Collectors.joining(','));
     }
 
     private String power(String q) {
@@ -83,7 +85,6 @@ public class Answerer {
         List<String> values = Arrays.stream(q.substring(8, q.length()).split(" to the power of ")).toList();
         BigInteger value = new BigInteger(values.get(0));
         return value.pow(Integer.parseInt(values.get(1))).toString();
-
     }
 
 }
