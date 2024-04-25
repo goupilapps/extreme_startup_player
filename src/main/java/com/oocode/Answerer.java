@@ -18,6 +18,10 @@ public class Answerer {
         if (question.contains("multiplied by")) {
             return multiplied(question.split("\\?")[0]);
         }
+
+        if (question.startsWith("Which of the following numbers is both a square and a cube: ")) {
+            return squarecube(question.split("\\?")[0]);
+        }
         return "??";
 
     }
@@ -34,4 +38,14 @@ public class Answerer {
     private String multiplied(String q) {
         return Arrays.stream(q.substring(8, q.length()).split(" multiplied by ")).map(Integer::parseInt).reduce(1, (integer, integer2) -> integer*integer2).toString();
     }
+
+    private String squarecube(String q) {
+        return ((Arrays.stream(q.split(":")[1].split(",")).map(String::trim).filter(integer -> roo(Double.parseDouble(integer))).toArray()[0])).toString();
+    }
+
+    private Boolean roo(Double one) {
+        return (Math.sqrt(one) - Math.round(Math.sqrt(one)) == 0) && (Math.cbrt(one) - Math.round(Math.cbrt(one)) == 0);
+    }
+
+
 }
