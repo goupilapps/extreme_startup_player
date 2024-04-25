@@ -15,6 +15,11 @@ public class Answerer {
             return plus(question.split("\\?")[0]);
         }
 
+        if (question.contains("minus")) {
+            return minus(question.split("\\?")[0]);
+        }
+
+
         if (question.contains("multiplied by")) {
             return multiplied(question.split("\\?")[0]);
         }
@@ -34,6 +39,11 @@ public class Answerer {
     private String plus(String q) {
         return Arrays.stream(q.substring(8, q.length()).split(" plus ")).map(Integer::parseInt).reduce(0, (integer, integer2) -> integer+integer2).toString();
     }
+
+    private String minus(String q) {
+        return Arrays.stream(q.substring(8, q.length()).split(" minus ")).map(Integer::parseInt).reduce(0, (integer, integer2) -> -integer2-integer).toString();
+    }
+
 
     private String multiplied(String q) {
         return Arrays.stream(q.substring(8, q.length()).split(" multiplied by ")).map(Integer::parseInt).reduce(1, (integer, integer2) -> integer*integer2).toString();

@@ -29,6 +29,13 @@ public class AnswererTest {
     }
 
     @Test
+    public void canAnswerMyName5() {
+        var contents = new Answerer().answerFor("What is 98 minus 84?");
+
+        assertThat(contents, equalTo("14"));
+    }
+
+    @Test
     public void canAnswerMyName3() {
         var contents = new Answerer().answerFor("What is 75 multiplied by 51?");
 
@@ -41,5 +48,8 @@ public class AnswererTest {
 
         assertThat(contents, equalTo("729"));
     }
+
+
+
 
 }
