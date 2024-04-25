@@ -27,4 +27,12 @@ public class AnswererTest {
 
         assertThat(contents, equalTo("81"));
     }
+
+    @Test
+    public void canAnswerMyName3() {
+        var contents = new Answerer().answerFor("What is 75 multiplied by 51?");
+
+        assertThat(contents, equalTo("3825"));
+    }
+
 }
