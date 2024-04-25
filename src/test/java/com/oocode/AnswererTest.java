@@ -13,4 +13,11 @@ public class AnswererTest {
 
         assertThat(contents, equalTo("dfiner"));
     }
+
+    @Test
+    public void canAnswerMyName1() {
+        var contents = new Answerer().answerFor("Which of the following numbers is the largest: 22, 27, 8?");
+
+        assertThat(contents, equalTo("27"));
+    }
 }
