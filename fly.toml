@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for extreme-startup-player1 on 2024-04-25T14:34:54+01:00
+# fly.toml app configuration file generated for extreme-startup-player1-bitter-sky-9698 on 2024-04-25T14:39:50+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'extreme-startup-player1'
+app = 'extreme-startup-player1-bitter-sky-9698'
 primary_region = 'lhr'
 
 [build]
