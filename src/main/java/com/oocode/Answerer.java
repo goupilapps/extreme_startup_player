@@ -12,7 +12,7 @@ public class Answerer {
         }
 
         if (question.contains("plus")) {
-            return plus(question);
+            return plus(question.split("\\?")[0]);
         }
         return "??";
 
@@ -24,6 +24,6 @@ public class Answerer {
     }
 
     private String plus(String q) {
-        return "";
+        return Arrays.stream(q.substring(8, q.length()).split(" plus ")).map(Integer::parseInt).reduce(0, (integer, integer2) -> integer+integer2).toString();
     }
 }

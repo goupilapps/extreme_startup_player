@@ -20,4 +20,11 @@ public class AnswererTest {
 
         assertThat(contents, equalTo("27"));
     }
+
+    @Test
+    public void canAnswerMyName2() {
+        var contents = new Answerer().answerFor("What is 18 plus 63?");
+
+        assertThat(contents, equalTo("81"));
+    }
 }
