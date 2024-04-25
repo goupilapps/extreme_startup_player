@@ -2,10 +2,7 @@ package com.oocode;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Answerer {
@@ -15,6 +12,10 @@ public class Answerer {
 
             if (question.startsWith("Which of the following numbers is the largest:")) {
                 return largest(question.split("\\?")[0]);
+            }
+
+            if (question.contains("plus")) {
+                return reverseplus(question.split("\\?")[0]);
             }
 
             if (question.contains("plus")) {
@@ -41,6 +42,7 @@ public class Answerer {
                 return power(question.split("\\?")[0]);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return "??";
         }
 
@@ -92,4 +94,150 @@ public class Answerer {
         return value.pow(Integer.parseInt(values.get(1))).toString();
     }
 
+    private String reverseplus(String q) {
+        var v = q.substring(8, q.length()).replace(" plus ", " + ").replace(" multiplied by ", " * ").split(" ");
+        //var t = new ReversePolishNotation().calc(v);
+
+        for (int i = 1; i < v.length-1; i=i+2) {
+            String tmp = v[i];
+            v[i] = v[i+1];
+            v[i+1] = tmp;
+        }
+        return String.valueOf(evalRPN(v));
+    }
+
+
+
+
+
+
+
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> st=new Stack<Integer>();
+        int a=0,b=0;
+        for(String s: tokens){
+
+            if(s.equals("+")){
+                a=st.pop();
+                b=st.pop();
+                st.push(a+b);
+            }
+            else if(s.equals("-")){
+                a=st.pop();
+                b=st.pop();
+                st.push(b-a);
+            }
+            else if(s.equals("*")){
+                a=st.pop();
+                b=st.pop();
+                st.push(a*b);
+            }
+            else if(s.equals("/")){
+                a=st.pop();
+                b=st.pop();
+                st.push(b/a);
+            }
+            else {
+                st.push(Integer.parseInt(s));
+            }
+
+        }
+        return st.pop();
+    }
+
+
+
+
+    public int stacky(String[] tokens)
+    {
+
+        // Initialize the stack and the variable
+        Stack<String> stack = new Stack<String>();
+        int x, y;
+        String result = "";
+        int get = 0;
+        String choice;
+        int value = 0;
+        String p = "";
+
+        // Iterating to the each character
+        // in the array of the string
+        for (int i = 0; i < tokens.length; i++) {
+
+            // If the character is not the special character
+            // ('+', '-' ,'*' , '/')
+            // then push the character to the stack
+            if (tokens[i] != "+" && tokens[i] != "-"
+                    && tokens[i] != "*" && tokens[i] != "/") {
+                stack.push(tokens[i]);
+                continue;
+            }
+            else {
+                // else if the character is the special
+                // character then use the switch method to
+                // perform the action
+                choice = tokens[i];
+            }
+
+            // Switch-Case
+            switch (choice) {
+                case "+":
+
+                    // Performing the "+" operation by popping
+                    // put the first two character
+                    // and then again store back to the stack
+
+                    x = Integer.parseInt(stack.pop());
+                    y = Integer.parseInt(stack.pop());
+                    value = x + y;
+                    result = p + value;
+                    stack.push(result);
+                    break;
+
+                case "-":
+
+                    // Performing the "-" operation by popping
+                    // put the first two character
+                    // and then again store back to the stack
+                    x = Integer.parseInt(stack.pop());
+                    y = Integer.parseInt(stack.pop());
+                    value = y - x;
+                    result = p + value;
+                    stack.push(result);
+                    break;
+
+                case "*":
+
+                    // Performing the "*" operation
+                    // by popping put the first two character
+                    // and then again store back to the stack
+
+                    x = Integer.parseInt(stack.pop());
+                    y = Integer.parseInt(stack.pop());
+                    value = x * y;
+                    result = p + value;
+                    stack.push(result);
+                    break;
+
+                case "/":
+
+                    // Performing the "/" operation by popping
+                    // put the first two character
+                    // and then again store back to the stack
+
+                    x = Integer.parseInt(stack.pop());
+                    y = Integer.parseInt(stack.pop());
+                    value = y / x;
+                    result = p + value;
+                    stack.push(result);
+                    break;
+
+                default:
+                    continue;
+            }
+        }
+
+        // Method to convert the String to integer
+        return Integer.parseInt(stack.pop());
+    }
 }

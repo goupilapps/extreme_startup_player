@@ -50,7 +50,6 @@ public class AnswererTest {
     }
 
     @Test
-    @Disabled
     public void canAnswerMyNam6() {
         var contents = new Answerer().answerFor("Which of the following numbers are primes: 80, 55, 63, 94, 53?");
 
@@ -71,6 +70,13 @@ public class AnswererTest {
         var contents = new Answerer().answerFor("What is 66 to the power of 96?");
 
         assertThat(contents, equalTo("4744798918330551171180617284481429834305801228466171779877713503983285104041580486246648664690007380441848356718808531139955344113236484486564044820572702230446110664992751616"));
+    }
+
+    @Test
+    public void canAnswerMyName9() {
+        var contents = new Answerer().answerFor("What is 59 multiplied by 61 plus 74?");
+        assertThat(contents, equalTo("3673"));
+
     }
 
 
